@@ -1,12 +1,23 @@
+import { useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-yaml";
-import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-nord_dark";
 
 export default function Hero() {
+  const [code, setCode] = useState();
+  const [link, setLink] = useState(null)
+
+  function fetchedYAML(e) {
+    e.preventDefault()
+    fetch(link)
+    .then(res => res.text())
+    .then(body => setCode(body));
+  }
 
   async function uploadedYAML(e) {
-    if(!e.type === "application/x-yaml") alert("Invalid file type !")
-    const data = await e.text()
+    if (!e.type === "application/x-yaml") alert("Invalid file type !");
+    const data = await e.text();
+    setCode(data);
   }
 
   return (
@@ -17,10 +28,11 @@ export default function Hero() {
       <p className="text-6xl text-white">CRD VIEWER</p>
       <div className="flex mt-12 tracking-widest">
         <input
+          onChange={e => setLink(e.target.value)}
           placeholder="com_alertmanagerconfigs.yaml"
           className="p-3 rounded w-96 focus:outline-none focus:ring focus:border-blue-300"
         />
-        <button className="ml-2 px-3 border-4 border-blue-500 border-opacity-25 text-center bg-white rounded h-12 font-bold">
+        <button onClick={fetchedYAML} className="ml-2 px-4 text-center bg-white hover:bg-gray-200 focus:outline-none rounded h-12 font-bold">
           Submit
         </button>
       </div>
@@ -43,8 +55,9 @@ export default function Hero() {
       <AceEditor
         style={{ width: "90%" }}
         mode="yaml"
-        theme="monokai"
-        name="UNIQUE_ID_OF_DIV"
+        value={code}
+        theme="nord_dark"
+        name="yaml-editor"
       />
     </section>
   );
