@@ -24,7 +24,7 @@ export default function Hero() {
           Submit
         </button>
       </div>
-      <hr className="my-12 w-1/3 text-white" />
+      <hr className="my-6 w-1/3 text-white" />
       <div
         onClick={() => document.getElementById("file_input").click()}
         className="w-96 h-28 text-white text-center justify-center items-center text-xl cursor-pointer rounded border-dashed border-2 border-white flex"
@@ -38,7 +38,7 @@ export default function Hero() {
           className="hidden"
         />
       </div>
-      <hr className="my-12 w-1/3 text-white" />
+      <hr className="my-6 w-1/3 text-white" />
 
       <AceEditor
         style={{ width: "90%" }}
