@@ -9,9 +9,8 @@ export default function Hero() {
 
   function fetchedYAML(e) {
     e.preventDefault()
-    fetch(link)
-    .then(res => res.text())
-    .then(body => setCode(body));
+    if(link) fetch(link).then(async res => setCode(await res.text()))
+    return null
   }
 
   async function uploadedYAML(e) {
@@ -25,7 +24,7 @@ export default function Hero() {
       id="hero"
       className="flex flex-col h-screen justify-center items-center bg-gray-800"
     >
-      <p className="text-6xl text-white">CRD VIEWER</p>
+      <p className="text-6xl text-white mt-40">CRD VIEWER</p>
       <div className="flex mt-12 tracking-widest">
         <input
           onChange={e => setLink(e.target.value)}
@@ -39,9 +38,9 @@ export default function Hero() {
       <hr className="my-6 w-1/3 text-white" />
       <div
         onClick={() => document.getElementById("file_input").click()}
-        className="w-96 h-28 text-white text-center justify-center items-center text-xl cursor-pointer rounded border-dashed border-2 border-white flex"
+        className="w-96 h-28 text-white text-center mb-6 justify-center items-center text-xl cursor-pointer rounded border-dashed border-2 border-white flex"
       >
-        <p className="tracking-wider uppercase">Upload File</p>
+        <p className="tracking-wider text-sm uppercase">Upload File</p>
         <input
           onChange={(e) => uploadedYAML(e.target.files[0])}
           accept=".yaml"
@@ -50,10 +49,9 @@ export default function Hero() {
           className="hidden"
         />
       </div>
-      <hr className="my-6 w-1/3 text-white" />
 
       <AceEditor
-        style={{ width: "90%" }}
+        style={{ width: "100%", height: "100%" }}
         mode="yaml"
         value={code}
         theme="nord_dark"

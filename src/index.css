@@ -9,3 +9,7 @@ body {
 .ace_print-margin {
   display: none
 }
+
+.ace_editor {
+  @apply shadow
+}
